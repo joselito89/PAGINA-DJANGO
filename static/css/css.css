@@ -1,0 +1,220 @@
+.header{
+    background-color:#303030;
+    width:100%;
+    height:auto;
+    position:relative;
+}
+
+#padingnav{
+    margin-top:-50px;
+}
+
+.navb{
+    background-color:#303030;
+    border-color:#303030;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 20px;
+    height: 10px;
+    padding-top: 0;
+}
+
+.logo{
+    width:200px;
+    height:70px;
+}
+
+
+#marginlogo{
+    margin-top:20px;
+    color:white;
+    font-weight:bold;
+}
+
+.container{
+    width:100%;
+}
+
+.containertable{
+    background-color:#FBFBF3;
+}
+
+#rojo{
+    background-color:#303030;
+}
+caption{
+    background-color:#7D7D7E;
+    color:white;
+    font-size:13px;
+    padding-left:5px;
+    font-weight:bold;
+}
+
+.tablaverde{
+    border:1px solid black;
+}
+
+.imgcarpeta{
+    border:none;
+}
+.tablacarpeta{
+    padding:3px;
+    font-size:12px;
+}
+#margin{
+    margin-top:10%;
+    margin-right:10%;
+    color:white;
+}
+
+#margin2{
+    margin-top:10%;
+    color:white;
+}
+
+#blanco2:hoover{
+    background-color:red;
+}
+
+#blanco2{
+    color:white;
+}
+.blanco{
+    color:white;
+    font-weight:bold;
+    font-size:12px;
+}
+.dropdown:hover #blanco2 {
+    background-color: #303030;
+    color:#3366FF;
+}
+.dropdown:hover .blanco {
+    background-color: #303030;
+    color:#3366FF;
+}
+
+#marginlogin{
+    background-color:rgba(48, 48, 48, 0.5);
+    border-radius:20px 20px;
+    border:1px solid black;
+    min-width:300px;
+    margin-top:10%;
+}
+
+#marginlogin2{
+    background-color:rgba(48, 48, 48, 0.5);
+    border-radius:20px 20px;
+    margin-top:2%;
+    border:1px solid black;
+    min-width:300px;
+    color:white;
+}
+#logbutton{
+    align:center;
+}
+.centro{
+    text-align:center;
+}
+.centro2{
+    float:right;
+}
+li{
+    color:red;
+}
+#derecha{
+    float:right;
+}
+
+.containeralarm{
+    background-color:#E1F1C7;
+    width:400px;
+    height:100px;
+}
+
+.alarm{
+    color:red;
+    font-weight:bold;
+    font-size:12px;
+}
+
+.centrar{
+    margin-top:20px;
+}
+
+#tdimagen{
+    width:50px;
+    height:50px;
+}
+
+#tdtitulo{
+    width:300px;
+    height:50px;
+}
+
+#tdautor{
+    width:70px;
+    height:50px;
+}
+
+#tdfecha{
+    width:50px;
+    height:50px;
+}
+
+.centro{
+    align:center;
+}
+
+.containerforo{
+    background-color:#FBFBF3;
+    padding:30px;
+}
+
+.containerperfil{
+    background-color:#FBFBF3;
+    padding:30px;
+    border-radius:50px 50px;
+}
+
+.nopuntos{
+    list-style-type: none;
+}
+
+.negro{
+    color:black;
+
+}
+
+#logoperfil{
+    border-radius:100px 100px;
+}
+
+#editperfilimg{
+    width:60px;
+    height:60px;
+    border-radius:100px 100px;
+    background-color:white;
+}
+
+.rojoalarma{
+    color:red;
+}
+.resaltando{
+    color:black;
+    font-weight:bold;
+}
+
+.resaltando2{
+    color:#D8D8D8;
+    font-weight:bold;
+}
+
+.nolog{
+    color:red;
+    font-weight:bold;
+}
+.red{
+    color:red;
+}

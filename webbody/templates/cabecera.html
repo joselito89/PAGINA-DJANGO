@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{% static 'css/css.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="{% static 'js/mostrar.js' %}"></script>
+	<title>{% block titulo %}CABECERA{% endblock %}</title>
+</head>
+
+<body style="background-image: url({% static 'images/degradation.jpg' %});background-repeat: no-repeat; background-attachment: fixed;background-size:100% 100%;">
+	{% block barra %}
+	<div class="header">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="background-color:#303030;">
+                <nav class="navbar navbar-inverse navb">
+                      <div class="container-fluid">
+                        <div class="navbar-header" id="marginlogo">
+                          <a href="{% url 'inicio' %}" ><img class="logo" src="{% static 'images/log.png' %}"></a>
+                        </div>
+                      </div>
+                    <ul class="nav navbar-nav navbar-right col-md-3" id="padingnav">
+                    {% if user.is_authenticated %}
+                     <li class="dropdown" >
+                         <a id="blanco2" href="" class="dropdown-toggle" data-toggle="dropdown">Bienvenido, <span class="blanco">{{ user.username }}</span> <b class="caret"></b></a>
+                         <ul class="dropdown-menu" style="height:120px;">
+                             <li style="height:30px;"><a href="{% url 'sign_out' %}"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+                             <li style="height:30px;"><a href="/usuario/user/perfil"><span class="glyphicon glyphicon-user"></span> Mi cuenta</a></li>
+                             <li style="height:30px;"><a href="{% url 'micontenido' %}"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span> Mi contenido</a></li>
+                            <li style="height:30px;"><a href="{% url 'contacto' %}"><span class="glyphicon glyphicon-envelope"></span> Contacto</a></li>
+                         </ul>
+                     </li>
+                  {% else %}
+                        <span class="blanco"><a href="{% url 'sign_in' %}" id="margin2"> Iniciar Sesión </a></span>/<span class="blanco"><a href="{% url 'registrar' %}" id="margin2">Registrarse </a></span>
+                  {% endif %}
+                </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+	{% endblock %}
+{% block cuerpo %}
+
+{% endblock %}
+{% block pie %}
+<div class="footer">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3" style="background-color:rgba(48, 48, 48, 0.5);color:white;">
+            <p class="centro" style="background-color:rgb(48,48,48,0.5);">Trabajo realizado por José Marchena Guerrero.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+
+</html>

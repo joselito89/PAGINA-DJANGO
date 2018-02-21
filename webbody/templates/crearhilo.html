@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'cabecera.html' %}
+{% block titulo %}
+    ShareFile - Creatúhilo
+{% endblock %}
+{% load widget_tweaks %}
+{% load static %}
+<body>
+    {% block cuerpo %}
+    <div  class="content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" id="blue">
+                <div class="responsive" id="cuerpodivform">
+                     <div class="row">
+                        <div class="col-md-4 col-md-offset-4" id="marginlogin2">
+                            <br/>
+                            <h4 class="centro">Crea tu Hilo</h4>
+                            <br/>
+                            <form method="POST" >
+                                {% csrf_token %}
+                                {% for hidden in form.hidden_fields %}
+                                  {{ hidden }}
+                                {% endfor %}
+                                {% for field in form.visible_fields %}
+                                  <div class="form-group">
+                                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    <div>{{field |add_class:'form-control' }}</div>
+                                    {% for error in field.errors %}
+                                      <span class="help-block">{{ error }}</span>
+                                    {% endfor %}
+                                  </div>
+                                {% endfor %}
+                                <input type="submit" name="submit" value="Aceptar" id="logbutton" class="btn btn-warning">
+                            </form>
+                            {{ pk }}
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

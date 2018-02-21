@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'cabecera.html' %}
+{% block titulo %}
+    ShareFile - Hilo
+{% endblock %}
+{% load widget_tweaks %}
+{% load static %}
+
+<body>
+{% block cuerpo %}
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="containerforo">
+                    <form method="POST" >
+                        {% csrf_token %}
+                        {% for hidden in form.hidden_fields %}
+                          {{ hidden }}
+                        {% endfor %}
+                        {% for field in form.visible_fields %}
+                          <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <div>{{field |add_class:'form-control'}}</div>
+                            {% for error in field.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                        {% endfor %}
+                        <input type="submit" onclick="return confirm('¿Seguro que desea modificar este elemento?')" name="submit" value="Aceptar" id="logbutton" class="btn btn-warning">
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'cabecera.html' %}
+{% block titulo %}
+    ShareFile - perfil
+{% endblock %}
+{% load static %}
+<body>
+{% block cuerpo %}
+    <div class="container-center">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="background-color:rgb(48,48,48,0.5);margin-top:11%;">
+                <br>
+                <div class="containerperfil">
+                        {% for usu in object %}
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="container-center">
+                                    <img src="{{ usu.imgprincipal.url }}" width="200px" height="200px" style="border-radius:200px 200px;" id="logoperfil">
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="log-md-12">
+                                        <h4>#{{ usu.usuario }}</h4>
+                                    </div>
+                                    <hr/>
+                                    <div class="col-md-6">
+                                        <p>Nombre: {{ usu.usuario.first_name }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Apellidos: {{ usu.usuario.last_name }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>F. Registro: {{ usu.usuario.date_joined }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>F. Nacimiento: {{ usu.fnacimiento }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Nacionalidad: {{ usu.nacionalidad }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Mensajes: {{ nmensajes.count }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

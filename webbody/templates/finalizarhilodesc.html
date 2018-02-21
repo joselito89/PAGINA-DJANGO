@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'cabecera.html' %}
+{% block titulo %}
+ShareFile - Crear Hilo Descargas
+{% endblock %}
+{% load static %}
+{% load widget_tweaks %}
+<body>
+{% block cuerpo %}
+    <div  class="content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" id="blue">
+                <div class="responsive" id="cuerpodivform">
+                     <div class="row">
+                        <div class="col-md-4 col-md-offset-4" id="marginlogin2">
+                            <br/>
+
+                            <br/>
+                            <h4 class="centro">Crea tu Hilo</h4>
+                            <br/>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% for hidden in form.hidden_fields %}
+                                  {{ hidden }}
+                                {% endfor %}
+                                {% for field in form.visible_fields %}
+                                  <div class="form-group">
+                                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                      {% if field.label == 'Carátula' %}
+                                    <div>{{field}}</div>
+                                      {% else %}
+                                      <div>{{field |add_class:'form-control' }}</div>
+                                      {% endif %}
+                                    {% for error in field.errors %}
+                                      <span class="help-block">{{ error }}</span>
+                                    {% endfor %}
+                                  </div>
+                                {% endfor %}
+                                <input type="submit" name="gi" value="Guardar e introducir otro" id="logbutton" class="btn btn-success">
+                                <input type="submit" name="gs" value="Guardar"  class="btn btn-warning">
+                                <input type="submit" name="ca" value="Cancelar" id="logbutton" class="btn btn-danger">
+                            </form>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

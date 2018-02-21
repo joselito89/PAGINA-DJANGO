@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'cabecera.html' %}
+{% block titulo %}
+    ShareFile - Perfil
+{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+<body>
+{% block cuerpo %}
+    <div class="container-center">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="background-color:rgb(48,48,48,0.5);">
+                <br>
+                <div class="containertable">
+                    <br>
+                    <h4 class="centro">Editar Perfil</h4>
+                    <br>
+                    {% if modificacion %}
+                        <div class="col-md-10 col-md-offset-1 centro alert alert-success fade in">Su perfil ha sido modificado con éxito</div>
+                    {% endif %}
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-1">
+                            <form method="POST" enctype="multipart/form-data">
+                               {% csrf_token %}
+                               {{ form|crispy }}
+                                <input type="submit" name="submit" value="Aceptar" id="logbutton" class="btn btn-warning">
+                            </form>
+                        </div>
+                        <div class="col-md-4" style="border:1px solid orange;background-color:#F5F2E7;border-radius:20px 20px; margin-left:2%;">
+                            <br>
+                            {% for usr in userr %}
+                            <p class="centro">Datos Perfil</p>
+                            <hr/>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p>Avatar: </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <img class="centro" src="{{ usr.imgprincipal.url }}" id="editperfilimg">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Nombre: {{ usr.usuario.first_name }}</p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Apellidos: {{ usr.usuario.last_name }}</p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>F.Nacimiento: {{ usr.fnacimiento }}</p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Nacionalidad: {{ usr.nacionalidad }}</p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Email: {{ usr.usuario.email }}</p>
+                                </div>
+                            </div>
+                            <hr/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'cabecera.html' %}
+{% block titulo %}
+ShareFile - Crear Hilo Descargas
+{% endblock %}
+{% load static %}
+{% load widget_tweaks %}
+<body>
+{% block cuerpo %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2" style="background-color:rgb(48,48,48,0.5);">
+            <br>
+            <br>
+            <div class="row containertable">
+                {% if var  %}
+                {% if var == 1 %}
+                <div class="col-md-15">
+                    <br>
+                     <div class="col-md-10 col-md-offset-1 centro alert alert-success fade in">Comentario modificado</div>
+                </div>
+                {% endif %}
+                {% if var == 2 %}
+                <div class="col-md-15">
+                    <br>
+                     <div class="col-md-10 col-md-offset-1 centro alert alert-success fade in">Comentario eliminado</div>
+                </div>
+                {% endif %}
+                {% if var == 3 %}
+                <div class="col-md-15">
+                    <br>
+                     <div class="col-md-10 col-md-offset-1 centro alert alert-success fade in">Hilo eliminado</div>
+                </div>
+                {% endif %}
+                {% endif %}
+                <div class="col-md-5 col-md-offset-1">
+                    <h4 class="centro" style="color:#848484;font-weight:bold;">Comentarios:</h4>
+                    <hr/>
+                    {% if comentarios %}
+                    <div class="row">
+                        {% for com in comentarios %}
+                        <div class="col-md-4">
+                            {{ com.codigohilo.titulo }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ com.texto }}
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{% url 'elcomentario'  com.id%}" onclick="return confirm('¿Seguro que desea eliminar este elemento?')"><span style="color:red;" class="glyphicon glyphicon-trash"></span></a>
+                            <a href="{% url 'modcomentario'  com.id%}"><span style="color:#5882FA;" class="glyphicon glyphicon-pencil"></span></a>
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+                    <h4><span class="resaltando2" style="color:#D8D8D8;font-weight:bold;">No hay ningún comentario</span></h4>
+                    {% endif %}
+                </div>
+                <div class="col-md-5  containertable" style="margin-left:1%;">
+                    <h4 class="centro" style="color:#848484;font-weight:bold;">Cuenta:</h4>
+                    <hr/>
+                    {% for com in usuario %}
+                    <h4 style="color:red;"><span class="glyphicon glyphicon-trash"></span><a onclick="return confirm('¿Seguro que desea cancelar su cuenta?')" href="{% url 'elcuenta' %}" class="confirm-delete" style="color:red; ">Eliminar Cuenta</a></h4>
+                    {% endfor %}
+                </div>
+                {% if comentarios %}
+                <div class="col-md-5  containertable">
+                    {% else %}
+                    <div class="col-md-5 col-md-offset-1 containertable">
+                    {% endif%}
+                    <br>
+                    <br>
+                    <h4 class="centro" style="color:#848484;font-weight:bold;">Hilos:</h4>
+                    <hr/>
+                    {% if hilos %}
+                    {% for hil in hilos %}
+                        <div class="col-md-8">
+                            {{ hil.titulo }}
+                        </div>
+                        <div class="col-md-4" >
+                            <a href="{% url 'elhilo' hil.titulo%}" onclick="return confirm('¿Seguro que desea eliminar este elemento?')"><span style="color:red;" class="glyphicon glyphicon-trash"></span></a>
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <h4><span class="resaltando2" style="color:#D8D8D8;font-weight:bold;">No hay ningún hilo</span></h4>
+                    <br>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+</body>
+</html>

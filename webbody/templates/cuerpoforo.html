@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'cabecera.html' %}
+{% block titulo %}
+    ShareFile - Foro
+{% endblock %}
+
+{% load static %}
+    <body>
+     {% block cuerpo %}
+      <div class="container-center">
+          {% if user.is_authenticated %}
+          <div  class="row">
+              <div class="col-md-6 col-md-offset-3" style="background-color:rgba(48, 48, 48, 0.5);">
+                  <br>
+                  {% for hilo in query %}
+                  <a href="{% url 'crearhilo' hilo.codigo%}" id="derecha" class="btn btn-warning">Crear Hilo</a>
+                  {% endfor %}
+              </div>
+          </div>
+          {% endif %}
+          <div class="row">
+              <div class="col-md-6 col-md-offset-3" style="background-color:rgba(48, 48, 48, 0.5);">
+                    {% if user.is_authenticated %}
+                      {% else %}
+                      <br>
+                      {% endif %}
+                  <div class="containertable">
+                      {% if user.is_authenticated %}
+                      {% else %}
+                      <p class="alarm">&nbsp;- Debes estar logeado para poder crear un hilo</p>
+                      {% endif %}
+                      {% if query2 %}
+                      <table class="table">
+                            <thead>
+                                  <tr>
+                                      <th></th>
+                                      <th>Título</th>
+                                      <th>Autor</th>
+                                      <th>Fecha Creación</th>
+                                  </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for d in query2 %}
+                                <tr>
+                                    <td id="tdimagen"><img src="{{ d.codusuhilo.imgprincipal.url }}" class="img-thumbnail" alt="chat imagen" width="50px" height="50px"></td>
+                                    {% if d.titulo|length > 50 %}
+                                    <td class="centrar" id="tdtitulo"><a href="{% url 'hilo' d.codigo %}">{{d.titulo|slice:"0:50"}}...</a></td>
+                                    {% else %}
+                                    <td class="centrar" id="tdtitulo"><a href="{% url 'hilo' d.codigo %}">{{d.titulo}}</a></td>
+                                    {% endif %}
+
+                                            {% if d.codusuhilo.usuario.username == 'admins' %}
+                                            <td class="centrar" id="tdautor">#{{ d.codusuhilo.usuario.username }}</td>
+                                            {% else %}
+                                            <td class="centrar" id="tdautor"><a href="{% url 'perfil' d.codusuhilo.usuario.username%}">#{{ d.codusuhilo.usuario.username }}</a></td>
+                                            {% endif %}
+                                    <td class="centrar" id="tdfecha">{{ d.fechahora }}</td>
+                              </tr>
+                            {% endfor %}
+                            {% else %}
+                                <p class="centro">No existe ningun hilo en esta categoria</p>
+                            {% endif %}
+                            </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+    </div>
+    {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+{% extends "cabecera.html" %}
+    {% block titulo %}
+    ShareFiles - Pagina Principal
+    {% endblock %}
+{% load static %}
+    {% block cuerpo %}
+
+<body style="background-image: url({% static 'images/retro2.gif' %});background-repeat: no-repeat; background-attachment: fixed;background-size:100% 100%;">
+        <div class="container-center" >
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" id="rojo" style="background-color:rgba(48, 48, 48, 0.5);">
+                <br>
+                <div class="col-md-12">
+                    <div class="containertable">
+                        <table class="table">
+                            <caption><span class="blanco">Cotilleo </span></caption>
+                            <tbody>
+                                    <tr>
+                                        <td class="tablaverde"></td>
+                                        <td class="tablaverde">Foro</td>
+                                    </tr>
+                                {% for dat in object_list %}
+                                    <tr>
+                                        <td class="tablaverde" width="15px"><img src="{{dat.imagen.url}}" width="35px" align="center"></td>
+                                        <td class="tablaverde"><a href="{% url 'forohilos' dat.nombre %}">{{ dat.nombre }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-3" id="rojo" style="background-color:rgba(48, 48, 48, 0.5);">
+                <div class="col-md-12">
+                    <div class="containertable">
+                        <table class="table">
+                            <caption>Descargas</caption>
+                            <tbody>
+                                    <tr>
+                                        <td class="tablaverde"></td>
+                                        <td class="tablaverde">Foro</td>
+                                    </tr>
+                                {% for dat in datos2 %}
+                                    <tr>
+                                        <td class="tablaverde" width="15px"><img src="{{dat.imagen.url}}" width="35px" align="center"></td>
+                                        <td class="tablaverde"><a href="{% url 'forodescargas' dat.nombre%}"> {{ dat.nombre }}</a>
+                                        {% if dat.nombre == 'Peliculas' %}
+                                            </td>
+                                        {% endif %}
+                                         {% if dat.nombre == 'Videogames' %}
+
+                                            </td>
+                                        {% endif %}
+                                        {% if dat.nombre == 'Música' %}
+
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+
+</html>

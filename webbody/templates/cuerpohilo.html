@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'cabecera.html' %}
+{% block titulo %}
+    ShareFile - Hilo
+{% endblock %}
+{% load widget_tweaks %}
+{% load static %}
+
+<body>
+{% block cuerpo %}
+    {% for a in object_list %}
+    <div class="container-center">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="background-color:rgba(48, 48, 48, 0.5);">
+                {% if user.is_authenticated %}
+                    <br>
+                    <button type="button" onclick="mostrar('oculto','derecha')" id="derecha" value=Comentar class="btn btn-warning">Comentar</button>
+                  {% endif %}
+            </div>
+        </div>
+        <div class="row" id="oculto" hidden>
+            <div class="col-md-6 col-md-offset-3">
+                <div class="containerforo">
+                    <form method="POST" >
+                        {% csrf_token %}
+                        {% for hidden in form.hidden_fields %}
+                          {{ hidden }}
+                        {% endfor %}
+                        {% for field in form.visible_fields %}
+                          <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <div>{{field |add_class:'form-control'}}</div>
+                            {% for error in field.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                        {% endfor %}
+                        <input type="submit" name="submit" value="Aceptar" id="logbutton" class="btn btn-warning">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="background-color:rgba(48, 48, 48, 0.5);">
+                <div class="containerforo">
+                    <div class="row">
+                        <div class="col-md-6>">
+                            {% for hilo in object_list %}
+                                {{ hilo.fechahora }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        {% for usu in object_list %}
+                        <div class="col-md-2">
+                            <img src="{{ usu.codusuhilo.imgprincipal.url }}" class="img-thumbnail" style="width:80px; height:80px;border-radius:100px 100px;">
+                        </div>
+                        <div class="col-md-7" style="margin-left:-70px;">
+                            <ul class="nopuntos">
+
+                                {% if usu.codusuhilo.usuario.username == 'admins' %}
+                                <li class="negro">Usuario: #{{ usu.codusuhilo.usuario }}</li>
+                                {% else %}
+                                <li class="negro">Usuario: <a href="{% url 'perfil' usu.codusuhilo.usuario %}">#{{ usu.codusuhilo.usuario }}</a></li>
+                                {% endif %}
+                                {% endfor %}
+                                <li class="negro">Fecha Inscripción: {{ user.date_joined }}</li>
+                                <li class="negro">Mensajes: {{ queryusucoment.count }}</li>
+                                <li class="negro">Comentarios en el hilo: {{ querycomentarios.count }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr/>
+                    <br>
+                    <div class="centro">
+                       <h4>{{ a.titulo }}</h4>
+                    </div>
+                    <br>
+                    <div>
+                       {{ a.contenido }}
+                    </div>
+                    <br>
+                    <div class="centro">
+                           <h4>Comentarios</h4>
+                    </div>
+                    <div>
+                        {% if querycomentarios.count == 0 %}
+                            <div class="centro">
+                                <p>No hay ningun comentario</p>
+                            </div>
+                            {% else %}
+                            <div>
+                                {% for comentario in querycomentarios %}
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="{{ comentario.nombreusuario.imgprincipal.url }}" class="img-thumbnail" style="width:70px;height:70px;border-radius:100px 100px;">
+                                    </div>
+                                    <div class="col-md-10" style="margin-left:-70px;">
+                                        <ul class="nopuntos">
+                                            <li class="negro">{{ comentario.fechahora }}</li>
+                                            {% if comentario.nombreusuario.usuario.username == 'admins' %}
+                                            <li class="negro">#{{ comentario.nombreusuario }}</li>
+                                            {% else %}
+                                            <li class="negro"><a href="{% url 'perfil' comentario.nombreusuario.usuario.username%}">#{{ comentario.nombreusuario }}</a></li>
+                                            {% endif %}
+                                            <li class="negro">{{ comentario.texto }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <br>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
+</body>
+</html>

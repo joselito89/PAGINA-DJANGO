@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+{% extends "cabecera.html" %}
+{% load widget_tweaks %}
+    {% block titulo %}
+    Inicia Sesión
+    {% endblock %}
+
+{% load static %}
+<body style="background-image: url({% static 'images/carbon.jpg' %});background-repeat: no-repeat; background-attachment: fixed;background-size:100% 100%;">
+    {% block barra %}
+    <div class="header">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="background-color:#303030;">
+                <nav class="navbar navbar-inverse navb">
+                      <div class="container-fluid">
+                        <div class="navbar-header" id="marginlogo">
+                          <a href="{% url 'inicio' %}" ><img class="logo" src="{% static 'images/log.png' %}"></a>
+                        </div>
+                      </div>
+                    <ul class="nav navbar-nav navbar-right col-md-3" id="padingnav">
+                    {% if user.is_authenticated %}
+                     <li class="dropdown">
+                         <a id="blanco2" href="" class="dropdown-toggle" data-toggle="dropdown">Bienvenido, <span class="blanco">{{ user.username }}</span> <b class="caret"></b></a>
+                         <ul class="dropdown-menu">
+                             <li><a href="{% url 'sign_out' %}">Cerrar Session</a></li>
+                        </ul>
+                     </li>
+                  {% else %}
+                        <span class="blanco"><a href="{% url 'registrar' %}" id="margin2">Registrarse </a></span>
+                  {% endif %}
+                </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block cuerpo %}
+    <div class="containter-center">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5" id="marginlogin">
+                <br/>
+                <h4 class="centro" id="blanco2">Inicio de Sesión</h4>
+                <br/>
+                {% if form.errors %}
+                {% for error in form.errors %}
+                {% if error == '__all__' %}
+                <p class="rojoalarma"> Usuario o Contraseña incorrecto</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+               <form method="POST">
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                      {{ hidden }}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                      <div class="form-group" id="blanco2">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        <div>{{field |add_class:'form-control' }}</div>
+                        {% for error in field.errors %}
+                          <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                    {% endfor %}
+                    <input type="submit" name="submit" value="Aceptar" id="logbutton" class="btn btn-warning">
+                </form>
+                <br/>
+            </div>
+        </div>
+    </div>
+</body>
+    {% endblock %}
+</html>
